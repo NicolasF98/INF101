@@ -1,16 +1,18 @@
+#Travail de Nicolas FOURNOUT et Gabriel CHOMBART du groupe IMA-9
+
 import random
 
-cmpt_part = 1
-win_random, win_smart, val = 0, 0, 0
+cmpt_part = 1 #compteur de parti total
+win_random, win_smart, val = 0, 0, 0 #compteur de victoir pour chaque IA, val correspond à la valeur que nous allons essayer de trouver, elle est initialisé à 0
 
 while val != 100:
-        a, i, i2 = 0, 0, 0
-        b = 100
+        a, i = 0, 0  #a correspond à la borne inférieur de notre interval, i et i2 sont les compteurs respectif de l'IA_ aléatoire et l'IA_intelligente
+        b = 100 #b est la borne supérieur de notre interval
         rep = "z"
         nbr = int(input("Combien veux-tu d'essais ? "))
         while (rep != "b" and nbr != i):
                 print("Je cherche un nombre entre",a," et",b,"(",nbr-i,"essais )")
-                y = random.randint(a,b)
+                y = random.randint(a,b) #nombre aléatoire proposé par l'IA
                 print(y)
                 if val < y :
                         print("p")
@@ -31,7 +33,7 @@ while val != 100:
         print("L'IA aleatoire a gagné",win_random,"partis sur",cmpt_part)
         print("L'IA aleatoire a mis en moyenne", i/cmpt_part,"essais pour gagner")
 
-        i, a = 0, 0;
+        i, a = 0, 0 #on re-initialise nos compteurs
         b = 100
         rep = "z"
 

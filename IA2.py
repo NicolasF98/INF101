@@ -14,7 +14,7 @@ while play != "n":
         y = -1
         i = 0
         rep = random.randint(0,100)
-        nbr = int(input("Comment tu veux d'essais ?"))
+        nbr = int(input("Combien veux-tu d'essais ?"))
         while (rep != "b" and nbr != i):
                 print("Je cherche un nombre entre",a," et",b,"(",nbr-i,"essais )")
                 y = (b+a)//2
