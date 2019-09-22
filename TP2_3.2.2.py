@@ -1,10 +1,10 @@
 import random
 
 cmpt_part = 1
-win_random, win_smat, val = 0
+win_random, win_smart, val = 0, 0, 0
 
 while val != 100:
-        a, i, i2 = 0
+        a, i, i2 = 0, 0, 0
         b = 100
         rep = "z"
         nbr = int(input("Combien veux-tu d'essais ? "))
@@ -31,7 +31,7 @@ while val != 100:
         print("L'IA aleatoire a gagné",win_random,"partis sur",cmpt_part)
         print("L'IA aleatoire a mis en moyenne", i/cmpt_part,"essais pour gagner")
 
-        i, a = 0
+        i, a = 0, 0;
         b = 100
         rep = "z"
 
