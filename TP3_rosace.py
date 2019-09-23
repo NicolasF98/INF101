@@ -2,6 +2,7 @@ import turtle
 
 turtle.speed("fastest")
 x = -200
+save_x = x
 y = 200
 nb = 8
 r = 50
@@ -23,11 +24,12 @@ def rosace(x, y, nb, r):
         turtle.right(angle * i)
         i += 1
 
-
-while(col != 4):
-    rosace(x,y,nb,r)
-    col += 1
-col = 1
-x = x + ((50*col) + 15)
-y = y + ((50*col) + 15)
-ligne += 1
+while(ligne != 4):
+    while(col != 5):
+        rosace(x,y,nb,r)
+        col += 1
+        x = x + (200)
+    col = 1
+    x = save_x
+    y = y - 200
+    ligne += 1
