@@ -1,5 +1,5 @@
 import turtle
-turtle.speed("slowest")
+turtle.speed("fastest")
 turtle.up()
 turtle.goto(0,0)
 turtle.down()
