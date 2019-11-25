@@ -12,4 +12,21 @@ def jouerUnMot(dico):
         if (cpt == val):
             index = i
         cpt += 1    
-    print(dico[index])
+    print(index)
+
+def main():
+    rep = "non"
+    mot = "salut"
+    tours, win = 0,0
+    rejou = "o"
+    fr = {"salut":"hey", "tu":"you", "il":"he", "bien":"great"}
+    while (rejou == "o"):
+        while (traduire(fr, mot) != rep):
+            fr = {"salut":"hey", "tu":"you", "il":"he", "bien":"great"}
+            mot = jouerUnMot(fr)
+            rep = input("Trad : ")
+            tours += 1
+        win += 1
+        print("Tu as gg. \n Stats :",win/tours)
+        rejou = input("Rejouer ? (o/n)")
+main()
