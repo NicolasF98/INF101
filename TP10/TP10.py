@@ -57,8 +57,10 @@ def renard_poule(nbr_init_poule, nbr_init_renard, po1, po2, ren1, ren2, t):
         mort_poules = po1 + po2*nbr_init_renard
         nbr_init_renard = mort_poules
         cpt += 1 
-        simulation[t].append(nat_renards - mort_renards)
-        simulation(nbr_init_poule - mort_poules)
-        
+        simulation[cpt].append(nat_renards - mort_renards)
+        simulation[cpt].append((nbr_init_poule - mort_poules))
+
     return simulation
 
+
+print(renard_poule(50, 10, 3, 10, 3, 10, 10))
