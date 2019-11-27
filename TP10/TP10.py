@@ -1,6 +1,6 @@
 #3.10.1
 
-def nouveau_nbr_poule_nat(nbr_init, taux, t):
+def nbr_poule_nat(nbr_init, taux, t):
     cpt = 0
     #On boucle autant que le nombre d'année
     while (cpt != t):
@@ -11,11 +11,11 @@ def nouveau_nbr_poule_nat(nbr_init, taux, t):
         cpt += 1
     return nbr_final
 
-print(nouveau_nbr_poule_nat(10, 0.1, 10))
+print(nbr_poule_nat(10, 0.1, 10))
 
 #3.10.2
 
-def nouveau_nbr_poule_mort(nbr_init, taux_nat, taux_mort, t):
+def nbr_poule(nbr_init, taux_nat, taux_mort, t):
     cpt = 0
     #On boucle autant que le nombre d'année
     while (cpt != t):
@@ -25,28 +25,48 @@ def nouveau_nbr_poule_mort(nbr_init, taux_nat, taux_mort, t):
         #On incrémente notre compteur
         cpt += 1
     return nbr_final
-print(nouveau_nbr_poule_mort(10, 0.1,0.4, 10))
 
-#def new(nbr_init, taux_nat_min, taux_nat_max, taux_mort_min, taux_mort_max, t):
- #   combi_total=[[]]
-  #  toto = 0
-   # nv = 10*(taux_nat_max-taux_nat_min) * 10*(taux_mort_max-taux_mort_min)
+print(nbr_poule(10, 0.9, 0.4, 10))
+
+def simulation(nbr_init, taux_nat_min, taux_nat_max, taux_mort_min, taux_mort_max,  t):
+    #liste qui va contenir toutes nos simulations
+    simulations = []
+
+    #initialisation d'une variable taux_nat et mort qui vont nous servir de compteur dans nos boucles
+    taux_nat = taux_nat_min
+    taux_mort = taux_mort_min
+
+    #avec des deux boucles nous allons pouvoir simuler toutes les possibilités possibles
+    while (taux_nat <= taux_nat_max):
+        while (taux_mort <= taux_mort_max):
+
+            #creation des variables comme demandé dans l'ennoncé
+            nat_poules = nbr_poule_nat(nbr_init, taux_nat, t)
+            mort_poules = nbr_poule_nat(nbr_init, taux_nat, t) - nbr_poule(nbr_init, taux_nat, taux_mort, t)
+            pop_total = nbr_poule(nbr_init, taux_nat, taux_mort, t)
+
+            #ajout de notre simulation sous forme de liste dans notre liste originel qui contient
+            #l'ensemble de nos simulations
+            simulations.append([nat_poules, mort_poules, pop_total])
+
+            #on incrémente notre taux de mort de 0.1
+            taux_mort += 0.1
+
+        #ici on re-initialise notre taux_mort à sa valeur minimal pour pouvoir entrer à nouveau
+        #dans notre 2eme boucle while, et on incrémente notre taux de nat de 0.1 
+        taux_mort = taux_mort_min
+        taux_nat += 0.1
     
-   # for i in range[taux_nat_min, taux_nat_max, 0.1]:
-    #    for j in range[taux_mort_min, taux_mort_max, 0.1]:
-     #       combi_total[].append(nouveau_nbr_poule_nat(nbr_init,i,t))
-      #      combi_total[i*10].append(nouveau_nbr_poule_nat(nbr_init,i,t) - nouveau_nbr_poule_mort(nbr_init, i, j,t))
-       #     combi_total[i*10].append(nouveau_nbr_poule_mort(nbr_init, i, j,t))
+    return simulations
 
-    #return combi_total
-     
-#print(new(100, 0.5, 1, 0.5, 1, 10))
+print(simulation(100, 0.1, 1, 0.1, 1, 10))
 
 # 3.10.3
 
 def renard_poule(nbr_init_poule, nbr_init_renard, po1, po2, ren1, ren2, t):
     cpt = 0
-    simulation = [[]]
+    simulation = list(range(0,t))
+
     while(cpt != t):
         nat_renards = ren1 * nbr_init_poule
         nbr_init_poule = nat_renards
@@ -56,11 +76,10 @@ def renard_poule(nbr_init_poule, nbr_init_renard, po1, po2, ren1, ren2, t):
 
         mort_poules = po1 + po2*nbr_init_renard
         nbr_init_renard = mort_poules
+        simulation[cpt] = [cpt, nat_renards - mort_renards, nbr_init_poule - mort_poules]
         cpt += 1 
-        simulation[cpt].append(nat_renards - mort_renards)
-        simulation[cpt].append((nbr_init_poule - mort_poules))
 
     return simulation
 
 
-print(renard_poule(50, 10, 3, 10, 3, 10, 10))
+#print(renard_poule(50, 10, 3, 10, 3, 10, 10))
