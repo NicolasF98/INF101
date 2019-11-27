@@ -78,4 +78,70 @@ print(simulation(100, 0.1, 1, 0.1, 1, 10))
 ```
 
 ## 3.10.3 - Renards:
-(1) 
+(1) Nous avons utiliser les formules fourni par le tp, afin de tester toutes les cas en fonction de notre pas de temps, nous avons utilisé une boucle while. 
+```py
+def renard_poule(nbr_init_poule, nbr_init_renard, po1, po2, ren1, ren2, t):
+    #creation d'un compteur 
+    cpt = 0
+
+    #creation de la liste qui va contenir toutes nos valeurs pour chaque pas de t
+    simulations = []
+
+    #boucle de 0 à t pour appliquer nos formule pour chaque pas de t
+    while(cpt != t):
+
+        #on applique les formules données par le tp
+        nat_renards = ren1 * (nbr_init_poule - (po1 + po2)*cpt)
+        mort_renards = ren2 / (nbr_init_poule - (po1 + po2)*cpt)
+        mort_poules = po1 + po2 * nbr_poule(nbr_init_renard, nat_renards, mort_renards, cpt)
+
+        #on ajoute notre liste de valeur à notre liste initiale
+        simulations.append([cpt, nbr_init_poule - mort_poules, (nbr_init_renard + nat_renards) - mort_renards])
+
+        #on incremete notre compteur
+        cpt += 1 
+
+    return simulations
+```
+(2)
+Plus le nombre de poule est grand, plus le nombre de renard va vite augementer et donc les poules vont rapidement mourrir.
+Cependant, moins il y a de poule et plus les renards vont mourrir.
+
+(3)
+
+```py
+def main():
+    #demande de saisie de l'utilisateur
+    po1 = float(input("Valeur de po1 (nbr poule morte naturellement / ans) : "))
+    po2 = float(input("Valeur de po2 (nbr poule mangé par un renard / ans) : "))
+    ren1 = float(input("Valeur de ren1 (coéf. nat des renards) : "))
+    ren2 = float(input("Valeur de ren2 (coéf. mort des renards): "))
+
+    #initialisation de notre compteur
+    cpt = 0
+
+    #t correspond à notre de pas maximal de temps
+    t = 10
+
+    #nombre initial de poule et de renard
+    nbr_init_poule = 1000
+    nbr_init_renard = 10
+
+    #on boule pour appliquer notre forume pour chaque pas de t
+    while(cpt != t):
+
+        #applications des formules données dans le tp
+        nat_renards = ren1 * (nbr_init_poule - (po1 + po2)*cpt)
+        mort_renards = ren2 / (nbr_init_poule - (po1 + po2)*cpt)
+        mort_poules = po1 + po2 * nbr_poule(nbr_init_renard, nat_renards, mort_renards, cpt)
+        
+        # incrementation de notre compteur
+        cpt += 1 
+
+        #affichage de nos valeurs
+        print("Nombre de poule : ", nbr_init_poule - mort_poules)
+        print("Nombre de renard : ", (nbr_init_renard + nat_renards) - mort_renards )
+        
+#lanchement de notre main
+main()
+```
